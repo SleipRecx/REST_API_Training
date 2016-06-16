@@ -12,32 +12,6 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
   console.log('Connected to postgres! Getting schemas...');
 });
 
-function getConnection(){
-  var mysql = require('mysql')
-  var connection = mysql.createConnection({
-    host: 'mysql.stud.ntnu.no',
-    user: 'markua_test',
-    password: '123456',
-    database: 'markua_trening'
-  });
-
-  connection.connect();
-  return connection;
-}
-
-function filterWithParameters(array,params){
-  for (var key in params){
-    var value = params[key]
-    var array = array.filter(function (row) {
-      if(row[key]==value){
-        return true
-      }
-      return false;
-    });
-  }
-  return array;
-}
-
 
 
 router.get('/', function(req, res, next) {
