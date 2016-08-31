@@ -12,8 +12,10 @@ var sessions = require('./routes/sessions');
 var app = express();
 
 // view engine setup
+app.set('port', process.env.PORT || 4000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,6 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('port', process.env.PORT || 3002);
 
 
 app.use('/api/sessions', sessions);
@@ -59,5 +62,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+var server = app.listen(app.get('port'), function () {
+    console.log('server listening on port ' + server.address().port);
+});
 
 module.exports = app;
